@@ -44,10 +44,10 @@ $this->title = 'Sass lists';
                         var imgUrl = param.row.logo;
                         return h('img',
                             {
-//                                style:{
-//                                    width:"32px",
-//                                    height:"32px"
-//                                },
+                                style:{
+                                    width:"16px",
+                                    height:"16px"
+                                },
                                 attrs: {
                                     src: imgUrl,
                                     style: 'width: 16px;height: 16px;border-radius: 2px;'
@@ -128,7 +128,6 @@ $this->title = 'Sass lists';
                 window.location = 'index.php?r=sass/sass/add';
             },
             updateStatus:function(sassId,status){
-		console.log(status);
                 $.post('/index.php?r=sass/sass/updatestatus',{sass_id:sassId,status:status},function(res){
 		    if(true){
 			app.$Modal.success({

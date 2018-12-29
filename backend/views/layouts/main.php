@@ -64,21 +64,21 @@ use common\widgets\Alert;
                 <li class="layui-nav-item ">
                     <a class="" href="javascript:;">Coupon</a>
                     <dl class="layui-nav-child">
-                        <dd ><a href="/index.php?r=coupon/coupon/lists">coupon列表</a></dd>
-                        <dd><a href="/index.php?r=coupon/coupon/add">coupon添加</a></dd></dd>
+                        <dd ><a href="/coupon/coupon/lists">coupon列表</a></dd>
+                        <dd><a href="/coupon/coupon/add">coupon添加</a></dd></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">sass</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/index.php?r=sass/sass/lists"">sass列表</a></dd>
-                        <dd><a href="/index.php?r=sass/sass/add"">sass添加</a></dd>
+                        <dd><a href="/sass/sass/lists"">sass列表</a></dd>
+                        <dd><a href="/sass/sass/add"">sass添加</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">信息更改</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="?r=/admin/user/lists">用户列表</a></dd>
+                        <dd><a href="/admin/user/lists">用户列表</a></dd>
                         <dd><a href="">安全设置</a></dd>
                     </dl>
                 </li>

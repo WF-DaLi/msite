@@ -74,20 +74,20 @@ class SiteController extends Controller
     public function actionIndex()
     {
 	$query = new Query();
-	$results = $query->select('product_id,name,price,sass')->from('coupon')->limit(100)->all();
-    // $request = Yii::$app->request;
-	//$page = $request->get('pn',1);
-        $result =['img'=>'https://img.alicdn.com/tfscom/i4/3285216671/O1CN01n0NZrU1z9MdIf68Ss_!!0-item_pic.jpg_230x230.jpg',
-                    'name'=>'街头嘻哈潮流宽松短裤男夏天ins超火港风口袋潮牌余文乐工装裤子',
-                    'price'=>'11',
-                    'num'=>'324',
-                    'logo'=>'https://l2.51fanli.net/shop/ico/c086f236fabf61d6.png?1405671048'
-                    ];
-        for($i=1;$i<100;$i++){
-//            $results[] = $result;
+	$coupons = $query->select('product_id,name,price,sale,sass,mainpic')->from('coupon')->limit(100)->all();
+    $sass = $query->select(['id', 'name','status','logo'])
+            ->from('sass')
+            ->where(['status'=>[1]])
+            ->orderBy('id')
+            ->all();
+        $sass = !empty($sass)? array_column($sass,'logo','id'):[];
+        if (!empty($coupons)) {
+            foreach($coupons as &$coupon ) {
+                 $coupon['sass_logo'] = $sass[$coupon['sass']]?? '';
+            }
         }
-        $this->coupons = json_encode($results,JSON_UNESCAPED_UNICODE);
-        return $this->render('index',['coupons'=>json_encode($results,JSON_UNESCAPED_UNICODE)]);
+        $this->coupons = json_encode($coupons,JSON_UNESCAPED_UNICODE);
+        return $this->render('index',['coupons'=> !empty($coupons)? json_encode($coupons,JSON_UNESCAPED_UNICODE):'']);
     }
 
 
