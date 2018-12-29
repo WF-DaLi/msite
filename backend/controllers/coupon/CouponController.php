@@ -5,7 +5,7 @@
     use yii\filters\AccessControl;
     use yii\data\Pagination;
     use backend\models\coupon\Coupon;
-    use backend\models\coupon\CouponForm;
+    //use backend\models\coupon\CouponForm;
     use \PhpOffice\PhpSpreadsheet\IOFactory;
     use backend\controllers\AdminController;
     use yii\db\Query;
@@ -114,12 +114,12 @@
         public function actionAdd()
         {
             $vars = Yii::$app->request->post();
-            $model = new CouponForm();
 	    $sassQuery  = new Query;
 	    $sassRes = $sassQuery->select(['id','name'])->from('sass')->where(['status'=>1])->orderBy('id')->all();
 	    //var_dump($sassRes);die; 
             return $this->render('/coupon/addCoupon', 
-				['model' => $model,
+				[
+				//'model' => $model,
 				 'sass'=>json_encode($sassRes,JSON_UNESCAPED_UNICODE)
 				]
 				);
@@ -140,6 +140,22 @@
             $response = new Response();
             $response->send();
         }
+	public function actionAddsass()
+	{
+		$coupon = new coupon;
+		$couponInfo = Yii::$app->request->post('couponinfo');
+        $couponInfo = json_decode($couponInfo,true);
+		$coupon->price = $couponInfo['price']?? 0;
+        $coupon->sale = $couponInfo['sale_price']?? 0;
+        $coupon->couponBgtime  = !empty($couponInfo['start_date'])? strtotime($couponInfo['start_date']): 0;
+        $coupon->couponEndtime  = !empty($couponInfo['end_date'])? strtotime($couponInfo['end_date']): 0;
+        $coupon->sass = $couponInfo['sass']?? 0;
+		$coupon->product_id = rand(1,1000000);
+		$coupon->name = $couponInfo['name']?? '';
+		$coupon->mainpic = $couponInfo['mainpic']?? '';
+		$coupon->couponPushUrl = $couponInfo['backurl']?? '';
+		$coupon->save();
+	}
 	public function actionImportexcel($type)
 	{	
 	    

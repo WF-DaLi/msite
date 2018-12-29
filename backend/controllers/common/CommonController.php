@@ -5,8 +5,9 @@ use Yii;
 use yii\web\Controller;
 use common\models\UploadForm;
 use yii\web\UploadedFile;
+use backend\controllers\AdminController;
 
-class UploadController extends Controller 
+class CommonController extends AdminController
 {
 	public	function actionUpload()
 	{

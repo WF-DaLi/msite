@@ -58,7 +58,7 @@
         {
          //   $this->layout_user = Yii::$app->user->identity->username;
 	        $query = new Query;
-            $res = $query->select(['id', 'name','status'])
+            $res = $query->select(['id', 'name','status','logo'])
                         ->from('sass')
 						->where(['status'=>[0,1]])
                         ->orderBy('id')
